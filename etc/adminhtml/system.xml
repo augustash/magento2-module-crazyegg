@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="augustash" translate="label" sortOrder="10">
+           <label><![CDATA[<a href="https://www.augustash.com" target="_BLANK" title="August Ash, Inc.">August Ash Extensions</a>]]></label>
+       </tab>
+       <section id="augustash_crazyegg" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+           <class>separator-top</class>
+           <label><![CDATA[CrazyEgg]]></label>
+           <tab>augustash</tab>
+           <resource>Augustash_Crazyegg::config</resource>
+           <group id="general" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+               <label><![CDATA[CrazyEgg General Settings]]></label>
+               <field id="enabled" translate="label comment" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label><![CDATA[Enable Extension]]></label>
+                   <comment><![CDATA[Enable or disable the inclusion of the CrazyEgg JavaScript snippet.]]></comment>
+                   <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+               </field>
+               <field id="account_number" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label><![CDATA[Account Number]]></label>
+                   <comment><![CDATA[CrazyEgg Account #]]></comment>
+               </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,24 @@
+{
+    "name": "augustash/module-crazyegg",
+    "description": "Simple module to allow CrazyEgg account number to be entered in system configuration and used in the javascript snippet inserted before the closing &#039;&lt;/head&gt;&#039; tag",
+    "type": "magento2-module",
+    "license": [
+        "proprietary"
+    ],
+    "authors":[
+        {
+            "name":"Josh Johnson",
+            "email":"josh@augustash.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Augustash\\Crazyegg\\": ""
+        }
+    }
+}
