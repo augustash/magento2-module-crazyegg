@@ -2,21 +2,41 @@
 
 namespace Augustash\Crazyegg\Block;
 
+use Augustash\Crazyegg\Helper\Data as CrazyeggHelperData;
 
 class Snippet extends \Magento\Framework\View\Element\Template
 {
     /**
-     * @var boolean
+     * @var \Augustash\Crazyegg\Helper\Data
      */
-    protected $isEnabled;
+    protected $helper;
 
     /**
-     * @var string
+     * @var \Magento\Store\Model\StoreManagerInterface
      */
-    protected $accountNumber;
+    protected $storeManager;
 
     protected $baseUrl = '//script.crazyegg.com/pages/scripts/';
     protected $baseUrlSuffix = '.js?';
+
+    /**
+     * class constructor
+     *
+     * @param \Magento\Framework\View\Element\Template\Context  $context
+     * @param CrazyeggHelperData                                $helper
+     * @param array                                             $data
+     */
+    public function __construct(
+        \Magento\Framework\View\Element\Template\Context $context,
+        CrazyeggHelperData $helper,
+        array $data = []
+    )
+    {
+        $this->helper           = $helper;
+        $this->storeManager     = $context->getStoreManager();
+
+        parent::__construct($context, $data);
+    }
 
 
     /**
@@ -24,13 +44,9 @@ class Snippet extends \Magento\Framework\View\Element\Template
      *
      * @return boolean
      */
-    public function getIsEnabled()
+    public function getIsEnabled($storeId = null)
     {
-        $this->isEnabled = $this->_scopeConfig->getValue(
-            'augustash_crazyegg/general/enabled',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-        return $this->isEnabled;
+        return $this->helper->isEnabled($storeId);
     }
 
     /**
@@ -38,15 +54,9 @@ class Snippet extends \Magento\Framework\View\Element\Template
      *
      * @return string
      */
-    public function getAccountNumber()
+    public function getAccountNumber($storeId = null)
     {
-        if (empty($this->accountNumber)) {
-            $this->accountNumber = $this->_scopeConfig->getValue(
-                'augustash_crazyegg/general/account_number',
-                \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-            );
-        }
-        return $this->accountNumber;
+        return $this->helper->getAccountNumber($storeId);
     }
 
     /**
@@ -57,9 +67,9 @@ class Snippet extends \Magento\Framework\View\Element\Template
      *
      * @return string
      */
-    public function getJavascriptUrl()
+    public function getJavascriptUrl($storeId = null)
     {
-        $accountNumber = $this->getAccountNumber();
+        $accountNumber = $this->getAccountNumber($storeId);
         if ($accountNumber) {
             $part1 = substr($accountNumber, 0, 4);
             $part2 = substr($accountNumber, 4, 4);
